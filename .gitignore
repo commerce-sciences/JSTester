@@ -3,3 +3,11 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.next
 release.properties
+*.bak
+*.swp
+*.iml
+*.log
+*.orig
+*.ipr
+*.iws
+.idea
