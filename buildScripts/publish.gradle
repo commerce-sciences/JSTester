@@ -1,0 +1,32 @@
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://ci.commercesciences.com:9001/artifactory/libs-release-local/"){
+                authentication(userName: "admin", password: "password")
+            }
+        }
+    }
+}
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourceJar
+}
+
+configurations{
+    sourceArchives
+}
+
+artifacts{
+    sourceArchives sourceJar
+}
+
+// install{
+//   configuration = configurations.sourceArchives + configurations.archives
+// }

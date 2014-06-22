@@ -1,7 +1,26 @@
 apply plugin: 'java'
 
+['publish'].each {
+    apply from: "buildScripts/${it}.gradle"
+}
+
+def artifactory = 'ci.commercesciences.com'
+group = 'com.commercesciences'
+archivesBaseName = 'JSTester'
+version = '0.0.1'
+
+buildscript {
+    repositories {
+        maven { url 'http://repo.jfrog.org/artifactory/gradle-plugins' }
+    }
+    dependencies {
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2.0.16')
+    }
+}
+
 repositories {
     mavenCentral()
+    maven { url  "http://$artifactory:9001/artifactory/repo" }
 }
 
 task prepareWrapper(type: Wrapper) {
