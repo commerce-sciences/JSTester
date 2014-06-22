@@ -4,6 +4,10 @@ repositories {
     mavenCentral()
 }
 
+task prepareWrapper(type: Wrapper) {
+    gradleVersion = '1.12'
+}
+
 dependencies {
     testCompile "junit:junit:4.11"
     compile "org.mozilla:rhino:1.7R4"
