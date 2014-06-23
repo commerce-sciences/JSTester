@@ -8,6 +8,7 @@ public class FunctionDefinitionFinder extends AbstractFinder {
 
     @Override
     public boolean visit(AstNode node) {
+        if (wasFound()) return false;
         if (node instanceof FunctionNode) {
             FunctionNode func = (FunctionNode)node;
             Name name = func.getFunctionName();

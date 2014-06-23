@@ -4,11 +4,12 @@ import com.commercesciences.JSTester.finders.AbstractFinder;
 import com.commercesciences.JSTester.finders.AssignmentFinder;
 import com.commercesciences.JSTester.finders.FunctionCallFinder;
 import com.commercesciences.JSTester.finders.FunctionDefinitionFinder;
-import com.commercesciences.JSTester.matchers.KeywordAssignmentMatcher;
-import com.commercesciences.JSTester.matchers.LiteralAssignmentMatcher;
-import com.commercesciences.JSTester.matchers.ObjectAssignmentMatcher;
+import com.commercesciences.JSTester.matchers.*;
 import org.mozilla.javascript.Parser;
+import org.mozilla.javascript.ast.AstNode;
 import org.mozilla.javascript.ast.AstRoot;
+
+import java.util.List;
 
 public class JSTester {
 
@@ -40,6 +41,15 @@ public class JSTester {
 
     public Boolean hasFunctionCall(String functionName) throws Exception {
         return codeContains(codeToTest, new FunctionCallFinder(), "setDefaultBubblerOption");
+    }
+
+    public Boolean hasFunctionCall(String functionName, String...args) throws Exception{
+        return codeContains(codeToTest, new FunctionCallFinder(), new FunctionCallMatcher(functionName, args));
+    }
+
+    // Supports arguments of type: String, Boolean
+    public Boolean hasFunctionCall(String functionName, List<Object> args) throws Exception {
+        return codeContains(codeToTest, new FunctionCallFinder(), new FunctionCallMatcher(functionName, args));
     }
 
     public Boolean hasFunctionDefinition(String functionName) throws Exception {

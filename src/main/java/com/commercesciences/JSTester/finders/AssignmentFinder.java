@@ -9,6 +9,7 @@ import org.mozilla.javascript.ast.*;
 
 public class AssignmentFinder extends AbstractFinder {
     @Override public boolean visit(AstNode node) {
+        if (wasFound()) return false;
         if (node instanceof ExpressionStatement) {
             ExpressionStatement statement = (ExpressionStatement)node;
             if (statement.getExpression() instanceof Assignment) {
