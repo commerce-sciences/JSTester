@@ -40,7 +40,7 @@ public class JSTester {
     }
 
     public Boolean hasFunctionCall(String functionName) throws Exception {
-        return codeContains(codeToTest, new FunctionCallFinder(), "setDefaultBubblerOption");
+        return codeContains(codeToTest, new FunctionCallFinder(), functionName);
     }
 
     public Boolean hasFunctionCall(String functionName, String...args) throws Exception{
