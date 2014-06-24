@@ -88,4 +88,23 @@ public class JSTesterTest {
         params.add(true);
         assertFalse(tester.code(code).hasFunctionCall("findMeWithParams", params));
     }
+
+    @Test
+    public void testHasFunctionDefinition() throws Exception {
+        String code = "function findMe(){}";
+        assertTrue(tester.code(code).hasFunctionDefinition("findMe"));
+    }
+
+    @Test
+    public void testNegativeHasFunctionDefinition() throws Exception {
+        String code = "function dontFindMe(){}";
+        assertFalse(tester.code(code).hasFunctionDefinition("findMe"));
+    }
+
+    @Test
+    public void testHasObjectAssignmentOneLevel() throws Exception {
+        tester.setCodeBootstrap("var a;");
+        String code = "a = {left: 'right'};";
+        assertTrue(tester.code(code).hasObjectAssignment("a", "left", "right"));
+    }
 }

@@ -60,11 +60,21 @@ public class JSTester {
         return codeContains(codeToTest, new AssignmentFinder(), new ObjectAssignmentMatcher(root, objectName, propLeft, propRight));
     }
 
+    public Boolean hasObjectAssignment(String root, String propLeft, String propRight) throws Exception {
+        return codeContains(codeToTest, new AssignmentFinder(), new ObjectAssignmentMatcher(root, root, propLeft, propRight));
+    }
+
     public Boolean hasLiteralAssignment(String varName, String varValue) throws Exception {
         return codeContains(codeToTest, new AssignmentFinder(), new LiteralAssignmentMatcher(varName, varValue));
     }
 
     public Boolean hasKeywordAssignment(String varName, String keyword) throws Exception {
         return codeContains(codeToTest, new AssignmentFinder(), new KeywordAssignmentMatcher(varName, keyword));
+    }
+
+    public Boolean hasObjectDefinition(String name, String propLeft, String propRight) throws Exception {
+        // TODO
+        // find var name = {left: right};
+        return true;
     }
 }
