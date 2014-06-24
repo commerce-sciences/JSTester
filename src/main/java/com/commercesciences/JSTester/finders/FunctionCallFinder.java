@@ -1,10 +1,7 @@
 package com.commercesciences.JSTester.finders;
 
 import com.commercesciences.JSTester.matchers.FunctionCallMatcher;
-import org.mozilla.javascript.ast.AstNode;
-import org.mozilla.javascript.ast.FunctionCall;
-import org.mozilla.javascript.ast.Name;
-import org.mozilla.javascript.ast.StringLiteral;
+import org.mozilla.javascript.ast.*;
 
 public class FunctionCallFinder extends AbstractFinder {
 
@@ -29,8 +26,14 @@ public class FunctionCallFinder extends AbstractFinder {
                         if (func.getArguments().size()==matcher.args.length) {
                             found = true;
                             for (AstNode argNode : func.getArguments()) {
-                                if (argNode instanceof StringLiteral && matcher.args[argNumber] instanceof StringLiteral) {
-                                    if (!((StringLiteral)argNode).getValue().equals(((StringLiteral)matcher.args[argNumber]).getValue())) {
+                                if (argNode instanceof StringLiteral) {
+                                    if (!(matcher.args[argNumber] instanceof StringLiteral) || !((StringLiteral)argNode).getValue().equals(((StringLiteral)matcher.args[argNumber]).getValue())) {
+                                        found = false;
+                                        break;
+                                    }
+                                } else
+                                if (argNode instanceof KeywordLiteral) {
+                                    if (!(matcher.args[argNumber] instanceof KeywordLiteral) || (argNode.getType()!=matcher.args[argNumber].getType())) {
                                         found = false;
                                         break;
                                     }
