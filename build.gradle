@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'idea'
 
 ['publish'].each {
     apply from: "buildScripts/${it}.gradle"
