@@ -3,7 +3,7 @@ apply plugin: 'maven'
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "http://localhost:9001/artifactory/libs-release-local/"){
+            repository(url: "http://ec2-54-221-219-81.compute-1.amazonaws.com:9001/artifactory/libs-release-local/"){
                 authentication(userName: "admin", password: "password")
             }
         }
